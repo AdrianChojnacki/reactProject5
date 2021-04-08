@@ -1,19 +1,64 @@
 class Form extends React.Component {
+  state = {
+    city: "Londyn",
+    text: "",
+    like: true,
+    visits: "1",
+  };
+
+  handleCityChange = (e) => {
+    this.setState({
+      city: e.target.value,
+    });
+  };
+
+  handleTextChange = (e) => {
+    this.setState({
+      text: e.target.value,
+    });
+  };
+
+  handleLikeChange = (e) => {
+    this.setState({
+      like: e.target.checked,
+    });
+  };
+
+  handleVisitsChange(e) {
+    this.setState({
+      visits: e.target.value,
+    });
+  }
+
   render() {
     return (
-      <form>
+      <div>
         <label>
-          Podaj imię:
-          <input type="text" name="name" />
+          Podaj miasto:
+          <input type="text" value={this.state.city} onChange={this.handleCityChange} />
         </label>
         <br />
         <label>
-          Podaj email:
-          <input type="text" name="email" />
+          Napisz coś o tym mieście:
+          <textarea value={this.state.text} onChange={this.handleTextChange}></textarea>
         </label>
         <br />
-        <button>Zapisz się</button>
-      </form>
+        <label>
+          Czy lubisz to miasto?
+          <input type="checkbox" checked={this.state.like} onChange={this.handleLikeChange} />
+        </label>
+        <br />
+        <label>
+          Ile razy byłeś w tym mieście?
+          <select value={this.state.visits} onChange={this.handleVisitsChange.bind(this)}>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="more">więcej</option>
+          </select>
+        </label>
+      </div>
     );
   }
 }
