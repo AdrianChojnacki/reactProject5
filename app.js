@@ -1,56 +1,49 @@
 class Form extends React.Component {
   state = {
     city: "Londyn",
-    text: "",
+    text: "...",
     like: true,
     visits: "1",
   };
 
-  handleCityChange = (e) => {
-    this.setState({
-      city: e.target.value,
-    });
+  handleChange = (e) => {
+    if (e.target.type === "checkbox") {
+      this.setState({
+        [e.target.name]: e.target.checked,
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+    }
   };
-
-  handleTextChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
-  };
-
-  handleLikeChange = (e) => {
-    this.setState({
-      like: e.target.checked,
-    });
-  };
-
-  handleVisitsChange(e) {
-    this.setState({
-      visits: e.target.value,
-    });
-  }
 
   render() {
     return (
       <div>
         <label>
           Podaj miasto:
-          <input type="text" value={this.state.city} onChange={this.handleCityChange} />
+          <input name="city" value={this.state.city} onChange={this.handleChange} type="text" />
         </label>
         <br />
         <label>
           Napisz coś o tym mieście:
-          <textarea value={this.state.text} onChange={this.handleTextChange}></textarea>
+          <textarea name="text" value={this.state.text} onChange={this.handleChange}></textarea>
         </label>
         <br />
         <label>
           Czy lubisz to miasto?
-          <input type="checkbox" checked={this.state.like} onChange={this.handleLikeChange} />
+          <input
+            name="like"
+            checked={this.state.like}
+            onChange={this.handleChange}
+            type="checkbox"
+          />
         </label>
         <br />
         <label>
           Ile razy byłeś w tym mieście?
-          <select value={this.state.visits} onChange={this.handleVisitsChange.bind(this)}>
+          <select name="visits" value={this.state.visits} onChange={this.handleChange}>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
